@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width-device-width, intial-scale-1.0">
+    <title>ilyess portfolio - waaaaaaaa </title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://kit.fontawesome.com/4357dffd47.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header">
+        <div class="container">
+            <nav>
+                <img src="images/logo.png" class="logo">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">about</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Portfolio</a></li>
+                </ul>
+            </nav>
+            <div class="header-text">
+                <p>UI/UX Desinger</p>
+                <h1>Hi,im <span>ilyes</span> <br> a young ambitious guy</h1>
+                <h2>Laghouat</h2>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="about">
+        <div class="container">
+            <div class="row">
+                <div class="about-col-1"><h1 class="Sub-titles">About me</h1><p>aaaaaaaaaaaaa aaaaaaaaaaaaa
+                    aaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaa
+                </p>
+                <div class="tab-titles">
+                    <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                    <p class="tab-links" onclick="opentab('experience')">Experience</p>
+                    <p class="tab-links " onclick="opentab('lol')">LOL</p>
+                    
+                </div>
+                    <div class="tab-contents active-tab" id="skills"><ul><li><span>UI/UX</span><br>desining weeeeeeeeeeeeeeeb</li></ul></div>
+                    <div class="tab-contents" id="experience"><ul><li><span>exp</span><br>exp exp exp exp</li></ul></div>
+                    <div class="tab-contents" id="lol"><ul><li><span>lol</span><br>lol lol lol lol lol lol lol</li></ul></div>
+            </div>
+                
+                <div class="about-col-2">
+                    <img src="images/pic_no_background.png">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+<div id="services">
+    <div id="container">
+        <h1 class="Sub-titles">My services</h1>
+        <div class="services-list">
+            <div>
+                <i class="fa-solid fa-cube"></i>
+                <h2>3D graphics</h2>
+
+                <p>I do the best 3D graphics out there in algeria </p>
+                <a href="#">Learn more</a>
+            </div>
+            <div>
+                <i class="fa-solid fa-file-excel"></i>
+                <h2>Excel document</h2>
+
+                <p>i Do excel tooo </p>
+                <a href="#">Learn more</a>
+            </div>
+            <div>
+                <i class="fa-solid fa-ghost"></i>
+                <h2>VFX/SFX</h2>
+
+                <p>I do the best 3D graphics out there in algeria </p>
+                <a href="#">Learn more</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="portfolio">
+    <div class="container"></div>
+    <h1 class="Sub-titles">Portfolio</h1>
+
+</div>
+</body>
+<script>
+    var tablinks = document.getElementsByClassName("tab-link");
+    var tabcontents = document.getElementsByClassName("tab-contents");
+    function opentab(tabname){
+        for(tablink of tablinks){
+            tablink.classList.remove("active-link");
+        }
+        for(tabcontent of tabcontents){
+            tabcontent.classList.remove("active-tab");
+        }
+        event.currentTarget.classList.add("active-link")
+        document.getElementById(tabname).classList.add("active-tab")
+    }
+</script>
+</html>
