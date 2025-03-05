@@ -1,139 +1,118 @@
 <!DOCTYPE html>
-<html lang="eng">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE-edge">
-    <meta name="viewport" content="width-device-width, intial-scale-1.0">
-    <title>Ilyes's Portfolio</title>
-        <link rel="stylesheet" href="style.css">
-        <script src="https://kit.fontawesome.com/4357dffd47.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Surprise</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffccf2;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #ff6699;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-content h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .modal-content button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .modal-content button.yes {
+            background-color: #ff6699;
+            color: #fff;
+        }
+
+        .modal-content button.no {
+            background-color: #ccc;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
-    <div id="header">
-        <div class="container">
-            <nav>
-                <img src="images/logo.png" class="logo">
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">about</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Portfolio</a></li>
-                </ul>
-            </nav>
-            <div class="header-text">
-                <div class="textoverlay">
-                    <p>3D Generalist</p>
-                    <h1>Hi,im <span>ilyes</span> <br> a young ambitious guy</h1>
-                    <h2>Laghouat</h2>
-                </div>
-                
-                <video class="videobg" autoplay muted loop>
-                    <source src="images/interion desing in blender.mp4" type="video/mp4"
-                </video>
-            </div>
-        </div>
-
+    <div class="container">
+        <h1>🎉 Birthday Surprise 🎉</h1>
     </div>
 
-    <div id="about">
-        <div class="container">
-            <div class="row">
-                <div class="about-col-1"><h1 class="Sub-titles">About me</h1><p>
-                    My Full name is meradji ilyes farouk eddine, I live in algeria ive been freelancing since
-                    2021 did various work in CGI Industry and ghraphic desing in general.
-                    what To make sure is i do my best in my work
-                    this Site is still WIP
-                </p>
-                <div class="tab-titles">
-                    <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
-                    <p class="tab-links" onclick="opentab('experience')">Experience</p>
-                    <p class="tab-links " onclick="opentab('lol')">Education</p>
-                    
-                </div>
-                    <div class="tab-contents active-tab" id="skills"><ul><li><span>CGI/CG</span><br>ive been self taught my entire life to do Computer graphics
-                    I do love what i Do and i made this website just to show case my work</li></ul></div>
-                    <div class="tab-contents" id="experience"><ul><li><span>Experience</span>
-                        <br>been 3D generalist using blender for 8 years now</li></ul></div>
-                    <div class="tab-contents" id="lol"><ul><li><span>Education</span><br>have Licence Degree in econom science
-                    as well as Instruments Degree
-                P AND ID Degree
-            3D modeling Degree</li></ul></div>
-            </div>
-                
-                <div class="about-col-2">
-                    <img src="images/port_pic.png">
-                </div>
-
-            </div>
+    <!-- Modal for the question -->
+    <div id="questionModal" class="modal">
+        <div class="modal-content">
+            <h2>Are you Rayan Sahari?</h2>
+            <button class="yes" onclick="showBirthdayMessage()">Yes</button>
+            <button class="no" onclick="closeModal()">No</button>
         </div>
     </div>
 
-
-<div id="services">
-    <div id="container">
-        <h1 class="Sub-titles">My services</h1>
-        <div class="services-list">
-            <div>
-                <i class="fa-solid fa-cube"></i>
-                <h2>3D graphics</h2>
-
-                <p>I do the best 3D graphics out there in algeria </p>
-                <a href="#">Learn more</a>
-            </div>
-            <div>
-                <i class="fa-solid fa-file-excel"></i>
-                <h2>Excel document</h2>
-
-                <p>i Do excel tooo </p>
-                <a href="#">Learn more</a>
-            </div>
-            <div>
-                <i class="fa-solid fa-ghost"></i>
-                <h2>VFX/SFX</h2>
-
-                <p>I do the best 3D graphics out there in algeria </p>
-                <a href="#">Learn more</a>
-            </div>
+    <!-- Modal for the birthday message -->
+    <div id="birthdayModal" class="modal">
+        <div class="modal-content">
+            <h2>🎂 Happiest Birthday to you, my lovely lady! 🎉 Welcome to the 20s! 🥳</h2>
+            <button onclick="closeModal()">Close</button>
         </div>
-
     </div>
-</div>
 
-<div id="portfolio">
-    <div class="container"></div>
-    <h1 class="Sub-titles">Portfolio</h1>
-    <div class="work-list">
-        <div class="work">
-            <img src="images/inv.png">
-            
+    <script>
+        // Show the question modal when the page loads
+        window.onload = function () {
+            document.getElementById('questionModal').style.display = 'flex';
+        };
 
-        </div>
-        <div class="work">
-            <img src="images/inv2.png">
-            
-        </div>
-        <div class="work">
-            <img src="images/inv3.png">
-          
-        </div>
-        
-    </div>
-    <h3>WEDDING INVITATIONS</h3>
-</div>
+        // Function to show the birthday message
+        function showBirthdayMessage() {
+            document.getElementById('questionModal').style.display = 'none';
+            document.getElementById('birthdayModal').style.display = 'flex';
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            document.getElementById('questionModal').style.display = 'none';
+            document.getElementById('birthdayModal').style.display = 'none';
+        }
+    </script>
 </body>
-<script>
-    var tablinks = document.getElementsByClassName("tab-link");
-    var tabcontents = document.getElementsByClassName("tab-contents");
-    function opentab(tabname){
-        for(tablink of tablinks){
-            tablink.classList.remove("active-link");
-        }
-        for(tabcontent of tabcontents){
-            tabcontent.classList.remove("active-tab");
-        }
-        event.currentTarget.classList.add("active-link")
-        document.getElementById(tabname).classList.add("active-tab")
-    }
-</script>
 </html>
