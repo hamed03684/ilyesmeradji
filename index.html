@@ -54,6 +54,14 @@
             margin-bottom: 20px;
         }
 
+        .modal-content input {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 80%;
+        }
+
         .modal-content button {
             padding: 10px 20px;
             margin: 5px;
@@ -72,6 +80,19 @@
             background-color: #ccc;
             color: #333;
         }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #ff6699;
+            animation: fall 2s linear infinite;
+        }
+
+        @keyframes fall {
+            0% { top: -10%; }
+            100% { top: 100%; }
+        }
     </style>
 </head>
 <body>
@@ -79,39 +100,157 @@
         <h1>🎉 Birthday Surprise 🎉</h1>
     </div>
 
-    <!-- Modal for the question -->
-    <div id="questionModal" class="modal">
+    <!-- Modal for the first question -->
+    <div id="question1Modal" class="modal">
         <div class="modal-content">
-            <h2>Are you Rayan Sahari?</h2>
-            <button class="yes" onclick="showBirthdayMessage()">Yes</button>
-            <button class="no" onclick="closeModal()">No</button>
+            <h2>Hey girl, are you Rayan Sahari?</h2>
+            <button class="yes" onclick="askPassword()">Yes</button>
+            <button class="no" onclick="tryAgain()">No</button>
         </div>
     </div>
 
-    <!-- Modal for the birthday message -->
-    <div id="birthdayModal" class="modal">
+    <!-- Modal for password input -->
+    <div id="passwordModal" class="modal">
         <div class="modal-content">
-            <h2>🎂 Happiest Birthday to you, my lovely lady! 🎉 Welcome to the 20s! 🥳</h2>
+            <h2>Enter the password:</h2>
+            <input type="text" id="passwordInput" placeholder="Password">
+            <button onclick="checkPassword()">Submit</button>
+        </div>
+    </div>
+
+    <!-- Modal for the second question -->
+    <div id="question2Modal" class="modal">
+        <div class="modal-content">
+            <h2>Are you 20 now?</h2>
+            <button class="yes" onclick="askToJoin()">Yes</button>
+            <button class="no" onclick="tryAgain()">No</button>
+        </div>
+    </div>
+
+    <!-- Modal for joining the club -->
+    <div id="joinModal" class="modal">
+        <div class="modal-content">
+            <h2>Welcome to the club, my lady! Now I want to ask you several questions. Are you in?</h2>
+            <button onclick="startQuestions()">Yes, I'M IN!</button>
+        </div>
+    </div>
+
+    <!-- Modal for the first question in the series -->
+    <div id="question3Modal" class="modal">
+        <div class="modal-content">
+            <h2>Is ilyes your boy?</h2>
+            <button class="yes" onclick="askQuestion4()">Yes</button>
+            <button class="no" onclick="tryAgain()">No</button>
+        </div>
+    </div>
+
+    <!-- Modal for the second question in the series -->
+    <div id="question4Modal" class="modal">
+        <div class="modal-content">
+            <h2>Are you happy with him?</h2>
+            <button class="yes" onclick="askQuestion5()">Yes</button>
+            <button class="no" onclick="tryAgain()">No</button>
+        </div>
+    </div>
+
+    <!-- Modal for the third question in the series -->
+    <div id="question5Modal" class="modal">
+        <div class="modal-content">
+            <h2>Are you going to be happy on your first 20s year?</h2>
+            <button class="yes" onclick="showFinalMessage()">Yes</button>
+            <button class="no" onclick="tryAgain()">No</button>
+        </div>
+    </div>
+
+    <!-- Modal for the final message -->
+    <div id="finalModal" class="modal">
+        <div class="modal-content">
+            <h2>🎂 Happiest Birthday ever to you, my lady! 🎉 I love you so much! I hope you loved this cute idea I made for you and only for you. Remember, everything will be fine! 💖</h2>
             <button onclick="closeModal()">Close</button>
         </div>
     </div>
 
     <script>
-        // Show the question modal when the page loads
+        // Show the first question modal when the page loads
         window.onload = function () {
-            document.getElementById('questionModal').style.display = 'flex';
+            document.getElementById('question1Modal').style.display = 'flex';
         };
 
-        // Function to show the birthday message
-        function showBirthdayMessage() {
-            document.getElementById('questionModal').style.display = 'none';
-            document.getElementById('birthdayModal').style.display = 'flex';
+        // Function to ask for password
+        function askPassword() {
+            document.getElementById('question1Modal').style.display = 'none';
+            document.getElementById('passwordModal').style.display = 'flex';
+        }
+
+        // Function to check the password
+        function checkPassword() {
+            const password = document.getElementById('passwordInput').value;
+            if (password === "ilyes") {
+                document.getElementById('passwordModal').style.display = 'none';
+                document.getElementById('question2Modal').style.display = 'flex';
+            } else {
+                tryAgain();
+            }
+        }
+
+        // Function to ask if she's 20
+        function askToJoin() {
+            document.getElementById('question2Modal').style.display = 'none';
+            document.getElementById('joinModal').style.display = 'flex';
+        }
+
+        // Function to start the questions
+        function startQuestions() {
+            document.getElementById('joinModal').style.display = 'none';
+            document.getElementById('question3Modal').style.display = 'flex';
+        }
+
+        // Function to ask the second question
+        function askQuestion4() {
+            document.getElementById('question3Modal').style.display = 'none';
+            document.getElementById('question4Modal').style.display = 'flex';
+        }
+
+        // Function to ask the third question
+        function askQuestion5() {
+            document.getElementById('question4Modal').style.display = 'none';
+            document.getElementById('question5Modal').style.display = 'flex';
+        }
+
+        // Function to show the final message
+        function showFinalMessage() {
+            document.getElementById('question5Modal').style.display = 'none';
+            document.getElementById('finalModal').style.display = 'flex';
+            createConfetti();
         }
 
         // Function to close the modal
         function closeModal() {
-            document.getElementById('questionModal').style.display = 'none';
-            document.getElementById('birthdayModal').style.display = 'none';
+            document.getElementById('finalModal').style.display = 'none';
+        }
+
+        // Function to handle "No" answers
+        function tryAgain() {
+            alert("Come on girl, try again for daddy, will ya?");
+            document.getElementById('question1Modal').style.display = 'flex';
+            document.getElementById('passwordModal').style.display = 'none';
+            document.getElementById('question2Modal').style.display = 'none';
+            document.getElementById('joinModal').style.display = 'none';
+            document.getElementById('question3Modal').style.display = 'none';
+            document.getElementById('question4Modal').style.display = 'none';
+            document.getElementById('question5Modal').style.display = 'none';
+            document.getElementById('finalModal').style.display = 'none';
+        }
+
+        // Function to create confetti effect
+        function createConfetti() {
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = `${Math.random() * 100}vw`;
+                confetti.style.animationDuration = `${Math.random() * 2 + 1}s`;
+                document.body.appendChild(confetti);
+            }
         }
     </script>
 </body>
