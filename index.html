@@ -3,569 +3,764 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Birthday Surprise</title>
+    <title>Ilyes Portfolio</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #ffccf2;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        * {
             margin: 0;
-            overflow: hidden;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .container {
-            text-align: center;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 5px;
+            background: red;
+            z-index: 200;
+            transition: width 0.3s ease;
         }
 
-        h1 {
-            font-size: 2rem;
-            color: #ff6699;
-            margin-bottom: 20px;
-        }
-
-        #startButton {
-            padding: 10px 20px;
-            font-size: 1.2rem;
-            background-color: #ff6699;
+        body {
+            background-color: #000;
             color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-size: 1.4rem;
         }
 
-        #startButton:hover {
-            background-color: #ff3385;
-        }
-
-        .modal {
-            display: none;
+        .header-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 100;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: inline-block;
+        }
+
+        .logo img {
+            width: 60px;
+            height: auto;
+        }
+
+        .nav-toggle {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        nav {
+            display: flex;
             align-items: center;
         }
 
-        .modal-content {
-            background-color: #fff;
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2rem;
+            position: relative;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: red;
+            bottom: -5px;
+            left: 0;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+
+        nav a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .hero video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            padding-left: 10%;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .hero-content p {
+            font-size: 2rem;
+            margin: 5px 0;
+        }
+
+        .hero-content .name, .hero-content .location {
+            color: red;
+            font-weight: 700;
+        }
+
+        .about {
+            padding: 80px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-content {
+            max-width: 500px;
+            text-align: left;
+        }
+
+        .about-content h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .about-content h2::after {
+            content: '';
+            width: 50px;
+            height: 3px;
+            background: red;
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+        }
+
+        .about-content p {
+            font-size: 1.4rem;
+        }
+
+        .about img {
+            width: 300px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .tabs {
+            padding: 0 20px 80px;
+            text-align: center;
+        }
+
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .tab-buttons button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.4rem;
+            padding: 10px 20px;
+            cursor: pointer;
+            position: relative;
+            font-family: 'Poppins', sans-serif;
+            text-transform: uppercase;
+            transition: transform 0.3s ease;
+        }
+
+        .tab-buttons button::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: red;
+            bottom: 0;
+            left: 0;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+
+        .tab-buttons button:hover {
+            transform: scale(1.1) translateY(-5px);
+        }
+
+        .tab-buttons button.active::after, .tab-buttons button:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        .tab-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.4rem;
+            display: none;
+            text-align: left;
             padding: 20px;
             border-radius: 10px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .services {
+            padding: 80px 20px;
             text-align: center;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        .modal-content h2 {
-            font-size: 1.5rem;
+        .services h2 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .services h2::after {
+            content: '';
+            width: 50px;
+            height: 3px;
+            background: red;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 300px;
+        }
+
+        .service-item.vfx-cgi {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/VFXCGI.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .service-item.cgi-render {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/CGIRENDER.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .service-item.three-d-motion {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/3DMOTIONGRAPHIC.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .service-item.two-d-motion {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/2DMOTION GHRAPICS.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .service-item.excel-word {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/EXCELWORD.png') no-repeat center center;
+            background-size: cover;
+        }
+
+        .service-item.poster {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/POSTER.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .service-item.bus-card {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/BUSCARD.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .service-item.video-editing {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/VIDEOEDITING.png') no-repeat center center;
+            background-size: cover;
+        }
+
+        .service-item h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .service-item p {
+            font-size: 1.4rem;
             margin-bottom: 20px;
+            flex-grow: 1;
         }
 
-        .modal-content button {
-            padding: 10px 20px;
-            margin: 5px;
+        .service-item button {
+            background: red;
+            color: #fff;
             border: none;
+            padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.2rem;
+            transition: background 0.3s;
+            width: 100px;
+            align-self: flex-start;
         }
 
-        .modal-content button.yes {
-            background-color: #ff6699;
+        .service-item button:hover {
+            background: darkred;
+        }
+
+        .portfolio {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .portfolio h2 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .portfolio h2::after {
+            content: '';
+            width: 50px;
+            height: 3px;
+            background: red;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .portfolio-grid img,
+        .portfolio-grid video {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            object-fit: cover;
+        }
+
+        .portfolio-grid img:hover,
+        .portfolio-grid video:hover {
+            transform: scale(1.1) translateY(-10px);
+        }
+
+        .contact {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .contact h2::after {
+            content: '';
+            width: 50px;
+            height: 3px;
+            background: red;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .contact form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact input, .contact textarea {
+            padding: 15px;
+            font-size: 1.4rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 5px;
             color: #fff;
+            font-family: 'Poppins', sans-serif;
         }
 
-        .modal-content button.no {
-            background-color: #ccc;
-            color: #333;
+        .contact textarea {
+            height: 150px;
+            resize: vertical;
         }
 
-        .happy-birthday {
-            position: absolute;
-            top: -50px;
-            font-size: 1.5rem;
-            color: #ff6699;
-            animation: fall linear infinite;
+        .contact button {
+            background: red;
+            color: #fff;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.4rem;
+            transition: background 0.3s;
         }
 
-        @keyframes fall {
-            0% { top: -50px; }
-            100% { top: 100vh; }
+        .contact button:hover {
+            background: darkred;
         }
 
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            background-color: #ff6699;
-            animation: confetti-fall 2s linear infinite;
-        }
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 10px;
+            }
 
-        @keyframes confetti-fall {
-            0% { top: -10%; transform: rotate(0deg); }
-            100% { top: 100%; transform: rotate(360deg); }
-        }
+            .nav-toggle {
+                display: block;
+                position: absolute;
+                right: 20px;
+                top: 20px;
+            }
 
-        .heart {
-            position: absolute;
-            font-size: 2rem;
-            color: #ff6699;
-            animation: float 5s linear infinite;
-        }
+            nav {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                padding: 10px 0;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: rgba(0, 0, 0, 0.9);
+            }
 
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-            100% { transform: translateY(0) rotate(360deg); }
+            nav.active {
+                display: flex;
+            }
+
+            nav a {
+                margin: 10px 20px;
+                text-align: left;
+                width: 100%;
+            }
+
+            .hero {
+                height: 100vh;
+            }
+
+            .hero-content {
+                padding: 20px;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1.5rem;
+            }
+
+            .about {
+                flex-direction: column;
+                padding: 40px 20px;
+            }
+
+            .about img {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .tab-buttons {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .tab-buttons button {
+                flex: 1 1 auto;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 id="ageCounter">🎉 Your Age: Loading... 🎉</h1>
-        <button id="startButton">Click here, my girl</button>
-    </div>
+    <div id="progress-bar"></div>
 
-    <!-- Audio for sound effects -->
-    <audio id="clickSound">
-        <source src="https://assets.mixkit.co/active_storage/sfx/3007/3007-preview.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-    <audio id="happyBirthdaySong">
-        <source src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-piano-1186.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-
-    <!-- Modal for the first question -->
-    <div id="question1Modal" class="modal">
-        <div class="modal-content">
-            <h2>Hey girl, are you Rayan Sahari?</h2>
-            <button class="yes" onclick="askPassword()">Yes</button>
-            <button class="no" onclick="tryAgain()">No</button>
+    <div class="header-container">
+        <div class="logo">
+            <img src="images/logo.png" alt="Ilyes Logo">
         </div>
+        <button class="nav-toggle">☰</button>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#contact">Contact</a>
+        </nav>
     </div>
 
-    <!-- Modal for password input -->
-    <div id="passwordModal" class="modal">
-        <div class="modal-content">
-            <h2>Enter the password:</h2>
-            <input type="text" id="passwordInput" placeholder="Password">
-            <button onclick="checkPassword()">Submit</button>
+    <section id="home" class="hero">
+        <video autoplay muted loop>
+            <source src="images/interion desing in blender.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-content">
+            <h1>3D Generalist</h1>
+            <p>Hi, I'm <span class="name">Ilyes</span></p>
+            <p>A young ambitious guy</p>
+            <p><span class="location">Algeria</span></p>
         </div>
-    </div>
+    </section>
 
-    <!-- Modals for the questions -->
-    <div id="question2Modal" class="modal">
-        <div class="modal-content">
-            <h2>Are you 20 now?</h2>
-            <button class="yes" onclick="askQuestion3()">Yes</button>
-            <button class="no" onclick="tryAgain()">No</button>
+    <section id="about" class="about">
+        <div class="about-content">
+            <h2>About Me</h2>
+            <p>My full name is Meradji Ilyes Farouk Eddine. I live in Algeria. I've been freelancing since 2021, doing various work in the CGI industry and graphic design in general. What I make sure of is that I do my best in my work. This site is still a WIP.</p>
         </div>
-    </div>
+        <img src="images/port_pic.png" alt="Ilyes Portrait">
+    </section>
 
-    <div id="question3Modal" class="modal">
-        <div class="modal-content">
-            <h2>Is ilyes your boy?</h2>
-            <button class="yes" onclick="askQuestion4()">Yes</button>
-            <button class="no" onclick="tryAgain()">No</button>
+    <section id="skills" class="tabs">
+        <div class="tab-buttons">
+            <button class="active" onclick="openTab('skills-tab')">Skills</button>
+            <button onclick="openTab('experience-tab')">Experience</button>
+            <button onclick="openTab('education-tab')">Education</button>
         </div>
-    </div>
+        <div id="skills-tab" class="tab-content active">
+            <p>I am a proficient 3D Generalist and graphic designer with over 5 years of experience using industry-standard tools such as Blender, Photoshop, and DaVinci Resolve. My skill set includes advanced proficiency in Adobe After Effects, GIMP, Marvelous Designer, Houdini, EmberGen, and Substance Painter. I specialize in texturing, UV mapping, 3D modeling, and both 2D and 3D motion graphics. Additionally, I am well-versed in Microsoft Office tools (Excel, Word, PowerPoint) and have strong programming skills in HTML, CSS, JavaScript, Python, and some C#. My diverse expertise allows me to tackle a wide range of creative and technical challenges efficiently.</p>
+        </div>
+        <div id="experience-tab" class="tab-content">
+            <p>As a 3D Generalist and freelancer for the past 4 years, I have honed my skills in delivering high-quality CGI and graphic design projects. My experience includes integrating CG elements into live footage, showcasing my expertise in visual effects (VFX). I have worked on various freelance projects since 2021, consistently meeting client expectations by combining creativity with technical precision.</p>
+        </div>
+        <div id="education-tab" class="tab-content">
+            <p>I pursued my education in Accounting at Amar Telidji University in Laghouat, Algeria, where I developed a strong foundation in analytical thinking and problem-solving. While my formal education is in accounting, my passion for CGI and graphic design has driven me to self-educate and excel in these creative fields.</p>
+        </div>
+    </section>
 
-    <div id="question4Modal" class="modal">
-        <div class="modal-content">
-            <h2>Are you happy with him?</h2>
-            <button class="yes" onclick="askQuestion5()">Yes</button>
-            <button class="no" onclick="tryAgain()">No</button>
+    <section id="services" class="services">
+        <h2>Services</h2>
+        <div class="services-grid">
+            <div class="service-item vfx-cgi">
+                <h3>VFX/CGI Integration</h3>
+                <p>Seamlessly blend CGI elements with live footage for stunning visual effects.</p>
+                <button>Hire Me</button>
+            </div>
+            <div class="service-item cgi-render">
+                <h3>CGI Render</h3>
+                <p>High-quality 3D renders for visualizations and creative projects.</p>
+                <button>Hire Me</button>
+            </div>
+            <div class="service-item three-d-motion">
+                <h3>3D Motion Graphics</h3>
+                <p>Dynamic and engaging 3D animations for videos and presentations.</p>
+                <button>Hire Me</button>
+            </div>
+            <div class="service-item two-d-motion">
+                <h3>2D Motion Graphics</h3>
+                <p>Captivating 2D animations to enhance your storytelling.</p>
+                <button>Hire Me</button>
+            </div>
+            <div class="service-item excel-word">
+                <h3>Excel/Word Documents</h3>
+                <p>Professional document creation and formatting for business needs.</p>
+                <button>Hire Me</button>
+            </div>
+            <div class="service-item poster">
+                <h3>Poster Design</h3>
+                <p>Eye-catching posters tailored to your brand or event.</p>
+                <button>Hire Me</button>
+            </div>
+            <div class="service-item bus-card">
+                <h3>Business Card Design</h3>
+                <p>Unique and professional business cards to make a lasting impression.</p>
+                <button>Hire Me</button>
+            </div>
+            <div class="service-item video-editing">
+                <h3>Video Editing</h3>
+                <p>Professional video editing to bring your footage to life.</p>
+                <button>Hire Me</button>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <div id="question5Modal" class="modal">
-        <div class="modal-content">
-            <h2>Are you going to be happy on your first 20s year?</h2>
-            <button class="yes" onclick="askQuestion6()">Yes</button>
-            <button class="no" onclick="tryAgain()">No</button>
+    <section id="portfolio" class="portfolio">
+        <h2>Portfolio</h2>
+        <div class="portfolio-grid">
+            <img src="images/inv.png" alt="Portfolio 1">
+            <img src="images/inv2.png" alt="Portfolio 2">
+            <img src="images/inv3.png" alt="Portfolio 3">
+            <img src="images/inv.png" alt="Portfolio 1 Duplicate">
+            <img src="images/inv2.png" alt="Portfolio 2 Duplicate">
+            <img src="images/inv3.png" alt="Portfolio 3 Duplicate">
+            <img src="images/inv.png" alt="Portfolio 1 Duplicate 2">
+            <img src="images/inv2.png" alt="Portfolio 2 Duplicate 2">
+            <img src="images/inv3.png" alt="Portfolio 3 Duplicate 2">
+            <video autoplay muted loop>
+                <source src="images/interion desing in blender.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <video autoplay muted loop>
+                <source src="images/interion desing in blender.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <video autoplay muted loop>
+                <source src="images/interion desing in blender.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <video autoplay muted loop>
+                <source src="images/interion desing in blender.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <video autoplay muted loop>
+                <source src="images/interion desing in blender.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <video autoplay muted loop>
+                <source src="images/interion desing in blender.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <video autoplay muted loop>
+                <source src="images/interion desing in blender.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <video autoplay muted loop>
+                <source src="images/interion desing in blender.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <video autoplay muted loop>
+                <source src="images/interion desing in blender.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
-    </div>
+    </section>
 
-    <div id="question6Modal" class="modal">
-        <div class="modal-content">
-            <h2>Do you believe in forever?</h2>
-            <button class="yes" onclick="askQuestion7()">Yes</button>
-            <button class="no" onclick="tryAgain()">No</button>
-        </div>
-    </div>
-
-    <div id="question7Modal" class="modal">
-        <div class="modal-content">
-            <h2>Do you love surprises?</h2>
-            <button class="yes" onclick="askQuestion8()">Yes</button>
-            <button class="no" onclick="tryAgain()">No</button>
-        </div>
-    </div>
-
-    <div id="question8Modal" class="modal">
-        <div class="modal-content">
-            <h2>Do you think ilyes is the best?</h2>
-            <button class="yes" onclick="askQuestion9()">Yes</button>
-            <button class="no" onclick="tryAgain()">No</button>
-        </div>
-    </div>
-
-    <div id="question9Modal" class="modal">
-        <div class="modal-content">
-            <h2>Will you always remember this birthday?</h2>
-            <button class="yes" onclick="askQuestion10()">Yes</button>
-            <button class="no" onclick="tryAgain()">No</button>
-        </div>
-    </div>
-
-    <div id="question10Modal" class="modal">
-        <div class="modal-content">
-            <h2>Do you promise to stay happy?</h2>
-            <button class="yes" onclick="askQuestion11()">Yes</button>
-            <button class="no" onclick="tryAgain()">No</button>
-        </div>
-    </div>
-
-    <div id="question11Modal" class="modal">
-        <div class="modal-content">
-            <h2>Do you love spending time with ilyes?</h2>
-            <button class="yes" onclick="askQuestion12()">Yes</button>
-            <button class="no" onclick="tryAgain()">No</button>
-        </div>
-    </div>
-
-    <div id="question12Modal" class="modal">
-        <div class="modal-content">
-            <h2>Do you think ilyes is romantic?</h2>
-            <button class="yes" onclick="askQuestion13()">Yes</button>
-            <button class="no" onclick="tryAgain()">No</button>
-        </div>
-    </div>
-
-    <div id="question13Modal" class="modal">
-        <div class="modal-content">
-            <h2>Do you feel special when you're with ilyes?</h2>
-            <button class="yes" onclick="askQuestion14()">Yes</button>
-            <button class="no" onclick="tryAgain()">No</button>
-        </div>
-    </div>
-
-    <div id="question14Modal" class="modal">
-        <div class="modal-content">
-            <h2>Do you think ilyes is your soulmate?</h2>
-            <button class="yes" onclick="askQuestion15()">Yes</button>
-            <button class="no" onclick="tryAgain()">No</button>
-        </div>
-    </div>
-
-    <div id="question15Modal" class="modal">
-        <div class="modal-content">
-            <h2>Do you love ilyes more every day?</h2>
-            <button class="yes" onclick="askQuestion16()">Yes</button>
-            <button class="no" onclick="tryAgain()">No</button>
-        </div>
-    </div>
-
-    <div id="question16Modal" class="modal">
-        <div class="modal-content">
-            <h2>Do you think ilyes is your best friend?</h2>
-            <button class="yes" onclick="askQuestion17()">Yes</button>
-            <button class="no" onclick="tryAgain()">No</button>
-        </div>
-    </div>
-
-    <div id="question17Modal" class="modal">
-        <div class="modal-content">
-            <h2>Do you trust ilyes completely?</h2>
-            <button class="yes" onclick="askQuestion18()">Yes</button>
-            <button class="no" onclick="tryAgain()">No</button>
-        </div>
-    </div>
-
-    <div id="question18Modal" class="modal">
-        <div class="modal-content">
-            <h2>Do you think ilyes is your forever?</h2>
-            <button class="yes" onclick="askQuestion19()">Yes</button>
-            <button class="no" onclick="tryAgain()">No</button>
-        </div>
-    </div>
-
-    <div id="question19Modal" class="modal">
-        <div class="modal-content">
-            <h2>Do you love ilyes more than anything?</h2>
-            <button class="yes" onclick="askQuestion20()">Yes</button>
-            <button class="no" onclick="tryAgain()">No</button>
-        </div>
-    </div>
-
-    <div id="question20Modal" class="modal">
-        <div class="modal-content">
-            <h2>Do you promise to love ilyes forever?</h2>
-            <button class="yes" onclick="showFinalMessage()">Yes</button>
-            <button class="no" onclick="tryAgain()">No</button>
-        </div>
-    </div>
-
-    <!-- Modal for the final message -->
-    <div id="finalModal" class="modal">
-        <div class="modal-content">
-            <h2>🎂 Happiest Birthday ever to you, my lady! 🎉 I love you so much! I hope you loved this cute idea I made for you and only for you. Remember, everything will be fine! 💖</h2>
-            <button onclick="closeModal()">Close</button>
-        </div>
-    </div>
+    <section id="contact" class="contact">
+        <h2>Contact</h2>
+        <form id="contact-form">
+            <input type="text" name="firstName" placeholder="First Name" required>
+            <input type="text" name="lastName" placeholder="Last Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </section>
 
     <script>
-        // Start the live age counter as soon as the page loads
-        window.onload = function () {
-            startAgeCounter();
-        };
+        window.addEventListener('load', () => {
+            const progressBar = document.getElementById('progress-bar');
+            let loaded = 0;
+            const totalAssets = document.querySelectorAll('img, video').length;
+            
+            if (totalAssets === 0) {
+                progressBar.style.width = '100%';
+                setTimeout(() => progressBar.style.display = 'none', 500);
+                return;
+            }
 
-        // Function to start the falling "Happy Birthday" messages and questions
-        document.getElementById('startButton').addEventListener('click', function () {
-            // Play click sound
-            const clickSound = document.getElementById('clickSound');
-            clickSound.play();
-
-            startFallingMessages();
-            createHearts();
-            setTimeout(() => {
-                document.getElementById('question1Modal').style.display = 'flex';
-            }, 3000); // Start questions after 3 seconds
+            document.querySelectorAll('img, video').forEach(asset => {
+                asset.addEventListener('loadeddata', () => {
+                    loaded++;
+                    const progress = (loaded / totalAssets) * 100;
+                    progressBar.style.width = `${progress}%`;
+                    if (progress === 100) {
+                        setTimeout(() => progressBar.style.display = 'none', 500);
+                    }
+                }, { once: true });
+                asset.addEventListener('error', () => {
+                    loaded++;
+                    const progress = (loaded / totalAssets) * 100;
+                    progressBar.style.width = `${progress}%`;
+                    if (progress === 100) {
+                        setTimeout(() => progressBar.style.display = 'none', 500);
+                    }
+                }, { once: true });
+            });
         });
 
-        // Function to create falling "Happy Birthday" messages
-        function startFallingMessages() {
-            const messages = ["🎉 Happy Birthday!", "🎂 Enjoy your day!", "💖 You're amazing!", "🎈 Let's celebrate!", "🌸 Best wishes!", "🎁 You deserve the best!"];
-            const interval = setInterval(() => {
-                const message = document.createElement('div');
-                message.className = 'happy-birthday';
-                message.textContent = messages[Math.floor(Math.random() * messages.length)];
-                message.style.left = `${Math.random() * 100}vw`; // Random horizontal position
-                message.style.animationDuration = `${Math.random() * 3 + 2}s`; // Random speed
-                document.body.appendChild(message);
+        function openTab(tabName) {
+            const contents = document.getElementsByClassName('tab-content');
+            for (let content of contents) {
+                content.classList.remove('active');
+            }
 
-                // Remove the message after it falls
-                setTimeout(() => {
-                    message.remove();
-                }, 5000);
-            }, 500); // Create a new message every 500ms
+            const buttons = document.querySelectorAll('.tab-buttons button');
+            for (let button of buttons) {
+                button.classList.remove('active');
+            }
 
-            // Stop falling messages after 3 seconds
-            setTimeout(() => {
-                clearInterval(interval);
-            }, 3000);
-        }
-
-        // Function to create floating hearts
-        function createHearts() {
-            for (let i = 0; i < 20; i++) {
-                const heart = document.createElement('div');
-                heart.className = 'heart';
-                heart.innerHTML = '💖';
-                heart.style.left = `${Math.random() * 100}vw`;
-                heart.style.animationDuration = `${Math.random() * 3 + 2}s`;
-                document.body.appendChild(heart);
-
-                // Remove the heart after it floats
-                setTimeout(() => {
-                    heart.remove();
-                }, 5000);
+            const targetContent = document.getElementById(tabName);
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
+            
+            if (event.currentTarget) {
+                event.currentTarget.classList.add('active');
             }
         }
 
-        // Function to create confetti effect
-        function createConfetti() {
-            for (let i = 0; i < 100; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.left = `${Math.random() * 100}vw`;
-                confetti.style.animationDuration = `${Math.random() * 2 + 1}s`;
-                document.body.appendChild(confetti);
-            }
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = this;
+            const firstName = form.firstName.value;
+            const lastName = form.lastName.value;
+            const email = form.email.value;
+            const message = form.message.value;
+            
+            const subject = `Contact from ${firstName} ${lastName}`;
+            const body = `From: ${firstName} ${lastName}\nEmail: ${email}\n\nMessage:\n${message}`;
+            
+            window.location.href = `mailto:ilyes.meradji@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        });
+
+        // Set initial active tab
+        const firstTabButton = document.querySelector('.tab-buttons button');
+        if (firstTabButton) {
+            firstTabButton.classList.add('active');
         }
 
-        // Function to calculate and display her exact age
-        function startAgeCounter() {
-            const birthDate = new Date('2005-03-09T19:00:00'); // March 9, 2005, 7:00 PM
-            const ageCounter = document.getElementById('ageCounter');
+        const navToggle = document.querySelector('.nav-toggle');
+        const nav = document.querySelector('nav');
 
-            function updateAge() {
-                const now = new Date();
-                const diff = now - birthDate;
-
-                const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
-                const months = Math.floor((diff % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.44));
-                const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 30.44)) / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-                ageCounter.innerHTML = `🎉 Your Age: ${years} years, ${Math.floor(months)} months, ${Math.floor(days)} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
-            }
-
-            setInterval(updateAge, 1000);
-            updateAge();
-        }
-
-        // Functions to navigate through the questions
-        function askPassword() {
-            document.getElementById('question1Modal').style.display = 'none';
-            document.getElementById('passwordModal').style.display = 'flex';
-        }
-
-        function checkPassword() {
-            const password = document.getElementById('passwordInput').value;
-            if (password === "ilyes") {
-                document.getElementById('passwordModal').style.display = 'none';
-                document.getElementById('question2Modal').style.display = 'flex';
-            } else {
-                tryAgain();
-            }
-        }
-
-        function askQuestion3() {
-            document.getElementById('question2Modal').style.display = 'none';
-            document.getElementById('question3Modal').style.display = 'flex';
-        }
-
-        function askQuestion4() {
-            document.getElementById('question3Modal').style.display = 'none';
-            document.getElementById('question4Modal').style.display = 'flex';
-        }
-
-        function askQuestion5() {
-            document.getElementById('question4Modal').style.display = 'none';
-            document.getElementById('question5Modal').style.display = 'flex';
-        }
-
-        function askQuestion6() {
-            document.getElementById('question5Modal').style.display = 'none';
-            document.getElementById('question6Modal').style.display = 'flex';
-        }
-
-        function askQuestion7() {
-            document.getElementById('question6Modal').style.display = 'none';
-            document.getElementById('question7Modal').style.display = 'flex';
-        }
-
-        function askQuestion8() {
-            document.getElementById('question7Modal').style.display = 'none';
-            document.getElementById('question8Modal').style.display = 'flex';
-        }
-
-        function askQuestion9() {
-            document.getElementById('question8Modal').style.display = 'none';
-            document.getElementById('question9Modal').style.display = 'flex';
-        }
-
-        function askQuestion10() {
-            document.getElementById('question9Modal').style.display = 'none';
-            document.getElementById('question10Modal').style.display = 'flex';
-        }
-
-        function askQuestion11() {
-            document.getElementById('question10Modal').style.display = 'none';
-            document.getElementById('question11Modal').style.display = 'flex';
-        }
-
-        function askQuestion12() {
-            document.getElementById('question11Modal').style.display = 'none';
-            document.getElementById('question12Modal').style.display = 'flex';
-        }
-
-        function askQuestion13() {
-            document.getElementById('question12Modal').style.display = 'none';
-            document.getElementById('question13Modal').style.display = 'flex';
-        }
-
-        function askQuestion14() {
-            document.getElementById('question13Modal').style.display = 'none';
-            document.getElementById('question14Modal').style.display = 'flex';
-        }
-
-        function askQuestion15() {
-            document.getElementById('question14Modal').style.display = 'none';
-            document.getElementById('question15Modal').style.display = 'flex';
-        }
-
-        function askQuestion16() {
-            document.getElementById('question15Modal').style.display = 'none';
-            document.getElementById('question16Modal').style.display = 'flex';
-        }
-
-        function askQuestion17() {
-            document.getElementById('question16Modal').style.display = 'none';
-            document.getElementById('question17Modal').style.display = 'flex';
-        }
-
-        function askQuestion18() {
-            document.getElementById('question17Modal').style.display = 'none';
-            document.getElementById('question18Modal').style.display = 'flex';
-        }
-
-        function askQuestion19() {
-            document.getElementById('question18Modal').style.display = 'none';
-            document.getElementById('question19Modal').style.display = 'flex';
-        }
-
-        function askQuestion20() {
-            document.getElementById('question19Modal').style.display = 'none';
-            document.getElementById('question20Modal').style.display = 'flex';
-        }
-
-        // Function to show the final message
-        function showFinalMessage() {
-            document.getElementById('question20Modal').style.display = 'none';
-            document.getElementById('finalModal').style.display = 'flex';
-            createConfetti();
-
-            // Play Happy Birthday song
-            const happyBirthdaySong = document.getElementById('happyBirthdaySong');
-            happyBirthdaySong.play();
-        }
-
-        // Function to close the modal
-        function closeModal() {
-            document.getElementById('finalModal').style.display = 'none';
-        }
-
-        // Function to handle "No" answers
-        function tryAgain() {
-            alert("Come on girl, try again for daddy, will ya?");
-            document.getElementById('question1Modal').style.display = 'flex';
-            document.getElementById('passwordModal').style.display = 'none';
-            document.getElementById('question2Modal').style.display = 'none';
-            document.getElementById('question3Modal').style.display = 'none';
-            document.getElementById('question4Modal').style.display = 'none';
-            document.getElementById('question5Modal').style.display = 'none';
-            document.getElementById('question6Modal').style.display = 'none';
-            document.getElementById('question7Modal').style.display = 'none';
-            document.getElementById('question8Modal').style.display = 'none';
-            document.getElementById('question9Modal').style.display = 'none';
-            document.getElementById('question10Modal').style.display = 'none';
-            document.getElementById('question11Modal').style.display = 'none';
-            document.getElementById('question12Modal').style.display = 'none';
-            document.getElementById('question13Modal').style.display = 'none';
-            document.getElementById('question14Modal').style.display = 'none';
-            document.getElementById('question15Modal').style.display = 'none';
-            document.getElementById('question16Modal').style.display = 'none';
-            document.getElementById('question17Modal').style.display = 'none';
-            document.getElementById('question18Modal').style.display = 'none';
-            document.getElementById('question19Modal').style.display = 'none';
-            document.getElementById('question20Modal').style.display = 'none';
-            document.getElementById('finalModal').style.display = 'none';
-        }
+        navToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            navToggle.textContent = nav.classList.contains('active') ? '✕' : '☰';
+        });
     </script>
 </body>
 </html>
