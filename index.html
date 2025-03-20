@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ilyes Portfolio</title>
+    <meta name="description" content="Portfolio of Ilyes Meradji, a 3D Generalist and Graphic Designer from Algeria specializing in CGI, VFX, and motion graphics.">
+    <meta name="keywords" content="Ilyes Meradji, 3D Generalist, Graphic Designer, CGI, VFX, Motion Graphics, Freelancer, Algeria">
+    <meta name="author" content="Ilyes Meradji">
+    <title>Ilyes Meradji - 3D Generalist & Graphic Designer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -17,18 +21,29 @@
             left: 0;
             width: 0%;
             height: 5px;
-            background: red;
+            background: #ff4d4d;
             z-index: 200;
             transition: width 0.3s ease;
         }
 
         body {
-            background-color: #000;
-            color: #fff;
+            background-color: #1a1a1a;
+            color: #e6e6e6;
             font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
+            line-height: 1.8;
             overflow-x: hidden;
-            font-size: 1.4rem;
+            font-size: 1.1rem;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .header-container {
@@ -36,29 +51,40 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(26, 26, 26, 0.95);
             z-index: 100;
-            padding: 10px 20px;
+            padding: 15px 30px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            animation: slideDown 0.5s ease-out;
         }
 
-        .logo {
-            display: inline-block;
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
         }
 
         .logo img {
-            width: 60px;
+            width: 70px;
             height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.1) rotate(5deg);
         }
 
         .nav-toggle {
             display: none;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             background: none;
             border: none;
-            color: #fff;
+            color: #e6e6e6;
             cursor: pointer;
         }
 
@@ -68,13 +94,19 @@
         }
 
         nav a {
-            color: #fff;
+            color: #e6e6e6;
             text-decoration: none;
-            margin: 0 15px;
-            font-size: 1.2rem;
+            margin: 0 20px;
+            font-size: 1.1rem;
             position: relative;
             font-weight: 500;
             text-transform: uppercase;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ff4d4d;
+            transform: translateY(-3px);
         }
 
         nav a::after {
@@ -82,8 +114,8 @@
             position: absolute;
             width: 100%;
             height: 2px;
-            background: red;
-            bottom: -5px;
+            background: #ff4d4d;
+            bottom: -8px;
             left: 0;
             transform: scaleX(0);
             transform-origin: bottom right;
@@ -97,10 +129,11 @@
 
         .hero {
             position: relative;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             justify-content: flex-start;
             align-items: center;
+            padding: 0 10%;
         }
 
         .hero video {
@@ -112,90 +145,167 @@
             object-fit: cover;
             transform: translate(-50%, -50%);
             z-index: -1;
+            opacity: 0.8;
+            animation: fadeInVideo 1.5s ease-in;
+        }
+
+        @keyframes fadeInVideo {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+            to {
+                opacity: 0.8;
+                transform: translate(-50%, -50%) scale(1);
+            }
         }
 
         .hero-content {
-            padding-left: 10%;
+            max-width: 600px;
+            background: rgba(26, 26, 26, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            animation: popIn 1s ease-out 0.5s both;
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .hero-content h1 {
-            font-size: 3rem;
-            font-weight: 600;
-            margin-bottom: 10px;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #ff4d4d;
         }
 
         .hero-content p {
-            font-size: 2rem;
-            margin: 5px 0;
+            font-size: 1.5rem;
+            margin: 10px 0;
         }
 
         .hero-content .name, .hero-content .location {
-            color: red;
+            color: #ff4d4d;
             font-weight: 700;
         }
 
         .about {
-            padding: 80px 20px;
+            padding: 100px 30px;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 50px;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .about-content {
-            max-width: 500px;
+            max-width: 600px;
             text-align: left;
         }
 
         .about-content h2 {
-            font-size: 3rem;
-            margin-bottom: 20px;
+            font-size: 2.5rem;
+            margin-bottom: 25px;
             position: relative;
+            color: #ff4d4d;
         }
 
         .about-content h2::after {
             content: '';
-            width: 50px;
+            width: 60px;
             height: 3px;
-            background: red;
+            background: #ff4d4d;
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 0;
+            animation: expandLine 0.8s ease-out forwards;
+        }
+
+        @keyframes expandLine {
+            from {
+                width: 0;
+            }
+            to {
+                width: 60px;
+            }
         }
 
         .about-content p {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
+            line-height: 1.9;
         }
 
         .about img {
-            width: 300px;
+            width: 350px;
             height: auto;
-            border-radius: 10px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .about img:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Download CV Button */
+        .download-cv-button {
+            background: #ff4d4d;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background 0.3s ease, transform 0.3s ease;
+            margin-top: 20px;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .download-cv-button:hover {
+            background: #cc0000;
+            transform: scale(1.05);
         }
 
         .tabs {
-            padding: 0 20px 80px;
+            padding: 0 30px 100px;
             text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .tab-buttons {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-bottom: 30px;
+            gap: 25px;
+            margin-bottom: 40px;
         }
 
         .tab-buttons button {
             background: none;
             border: none;
-            color: #fff;
-            font-size: 1.4rem;
-            padding: 10px 20px;
+            color: #e6e6e6;
+            font-size: 1.2rem;
+            padding: 12px 25px;
             cursor: pointer;
             position: relative;
             font-family: 'Poppins', sans-serif;
             text-transform: uppercase;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+        }
+
+        .tab-buttons button:hover, .tab-buttons button.active {
+            color: #ff4d4d;
+            transform: scale(1.1) translateY(-5px);
         }
 
         .tab-buttons button::after {
@@ -203,16 +313,12 @@
             position: absolute;
             width: 100%;
             height: 2px;
-            background: red;
+            background: #ff4d4d;
             bottom: 0;
             left: 0;
             transform: scaleX(0);
             transform-origin: bottom right;
             transition: transform 0.3s ease-out;
-        }
-
-        .tab-buttons button:hover {
-            transform: scale(1.1) translateY(-5px);
         }
 
         .tab-buttons button.active::after, .tab-buttons button:hover::after {
@@ -221,13 +327,13 @@
         }
 
         .tab-content {
-            max-width: 800px;
-            margin: 0 auto;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             display: none;
             text-align: left;
-            padding: 20px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
+            line-height: 1.9;
         }
 
         .tab-content.active {
@@ -235,222 +341,283 @@
         }
 
         .services {
-            padding: 80px 20px;
+            padding: 100px 30px;
             text-align: center;
+            background: #222;
         }
 
         .services h2 {
-            font-size: 3rem;
-            margin-bottom: 40px;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
             position: relative;
+            color: #ff4d4d;
         }
 
         .services h2::after {
             content: '';
-            width: 50px;
+            width: 60px;
             height: 3px;
-            background: red;
+            background: #ff4d4d;
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
+            animation: expandLine 0.8s ease-out forwards;
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .service-item {
             background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
+            padding: 30px;
+            border-radius: 15px;
             text-align: left;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 300px;
+            min-height: 350px;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .service-item.vfx-cgi {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/VFXCGI.jpg') no-repeat center center;
+        .service-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-size: cover;
+            background-position: center;
+            opacity: 0.3;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            z-index: -1;
         }
 
-        .service-item.cgi-render {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/CGIRENDER.jpg') no-repeat center center;
-            background-size: cover;
+        .service-item.vfx-cgi::before {
+            background-image: url('images/VFXCGI Integration.png');
         }
 
-        .service-item.three-d-motion {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/3DMOTIONGRAPHIC.jpg') no-repeat center center;
-            background-size: cover;
+        .service-item.cgi-render::before {
+            background-image: url('images/CGI Render.jpg');
         }
 
-        .service-item.two-d-motion {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/2DMOTION GHRAPICS.jpg') no-repeat center center;
-            background-size: cover;
+        .service-item.three-d-motion::before {
+            background-image: url('images/3D Motion Graphics.jpg');
         }
 
-        .service-item.excel-word {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/EXCELWORD.png') no-repeat center center;
-            background-size: cover;
+        .service-item.two-d-motion::before {
+            background-image: url('images/2D Motion Graphics.jpg');
         }
 
-        .service-item.poster {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/POSTER.jpg') no-repeat center center;
-            background-size: cover;
+        .service-item.excel-word::before {
+            background-image: url('images/ExcelWord Documents.png');
         }
 
-        .service-item.bus-card {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/BUSCARD.jpg') no-repeat center center;
-            background-size: cover;
+        .service-item.poster::before {
+            background-image: url('images/Poster Design.jpg');
         }
 
-        .service-item.video-editing {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/VIDEOEDITING.png') no-repeat center center;
-            background-size: cover;
+        .service-item.bus-card::before {
+            background-image: url('images/Business Card Design.jpg');
+        }
+
+        .service-item.video-editing::before {
+            background-image: url('images/Video Editing.png');
+        }
+
+        .service-item:hover::before {
+            opacity: 0.5;
+            transform: scale(1.1);
+        }
+
+        .service-item:hover {
+            transform: translateY(-10px) rotate(1deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
         }
 
         .service-item h3 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: #ff4d4d;
         }
 
         .service-item p {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             margin-bottom: 20px;
             flex-grow: 1;
         }
 
         .service-item button {
-            background: red;
+            background: #ff4d4d;
             color: #fff;
             border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 12px 25px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 1.2rem;
-            transition: background 0.3s;
-            width: 100px;
+            font-size: 1.1rem;
+            transition: background 0.3s ease, transform 0.3s ease;
+            width: 120px;
             align-self: flex-start;
         }
 
         .service-item button:hover {
-            background: darkred;
+            background: #cc0000;
+            transform: scale(1.05);
         }
 
         .portfolio {
-            padding: 80px 20px;
+            padding: 100px 30px;
             text-align: center;
-        }
-
-        .portfolio h2 {
-            font-size: 3rem;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .portfolio h2::after {
-            content: '';
-            width: 50px;
-            height: 3px;
-            background: red;
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .portfolio-grid img,
-        .portfolio-grid video {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-            object-fit: cover;
+        .portfolio h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            position: relative;
+            color: #ff4d4d;
         }
 
-        .portfolio-grid img:hover,
-        .portfolio-grid video:hover {
-            transform: scale(1.1) translateY(-10px);
+        .portfolio h2::after {
+            content: '';
+            width: 60px;
+            height: 3px;
+            background: #ff4d4d;
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: expandLine 0.8s ease-out forwards;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .portfolio-item img,
+        .portfolio-item video {
+            width: 100%;
+            height: auto;
+            max-height: 600px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            display: block;
+        }
+
+        .portfolio-item:hover img,
+        .portfolio-item:hover video {
+            transform: scale(1.05);
+        }
+
+        .portfolio-item .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            color: #e6e6e6;
+            padding: 15px;
+            font-size: 1.1rem;
+            text-align: center;
+            transform: translateY(100%);
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-item:hover .caption {
+            transform: translateY(0);
         }
 
         .contact {
-            padding: 80px 20px;
+            padding: 100px 30px;
             text-align: center;
+            background: #222;
         }
 
         .contact h2 {
-            font-size: 3rem;
-            margin-bottom: 40px;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
             position: relative;
+            color: #ff4d4d;
         }
 
         .contact h2::after {
             content: '';
-            width: 50px;
+            width: 60px;
             height: 3px;
-            background: red;
+            background: #ff4d4d;
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
+            animation: expandLine 0.8s ease-out forwards;
         }
 
         .contact form {
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 25px;
         }
 
         .contact input, .contact textarea {
             padding: 15px;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             background: rgba(255, 255, 255, 0.1);
             border: none;
-            border-radius: 5px;
-            color: #fff;
+            border-radius: 8px;
+            color: #e6e6e6;
             font-family: 'Poppins', sans-serif;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact input:focus, .contact textarea:focus {
+            transform: scale(1.02);
+            box-shadow: 0 0 10px rgba(255, 77, 77, 0.3);
+            outline: none;
         }
 
         .contact textarea {
-            height: 150px;
+            height: 180px;
             resize: vertical;
         }
 
         .contact button {
-            background: red;
+            background: #ff4d4d;
             color: #fff;
             border: none;
             padding: 15px;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 1.4rem;
-            transition: background 0.3s;
+            font-size: 1.2rem;
+            transition: background 0.3s ease, transform 0.3s ease;
         }
 
         .contact button:hover {
-            background: darkred;
+            background: #cc0000;
+            transform: scale(1.05);
         }
 
-        /* Mobile Responsive */
         @media (max-width: 768px) {
             .header-container {
-                padding: 10px;
+                padding: 15px 20px;
             }
 
             .nav-toggle {
@@ -464,11 +631,11 @@
                 display: none;
                 flex-direction: column;
                 width: 100%;
-                padding: 10px 0;
+                padding: 20px 0;
                 position: absolute;
                 top: 100%;
                 left: 0;
-                background: rgba(0, 0, 0, 0.9);
+                background: rgba(26, 26, 26, 0.95);
             }
 
             nav.active {
@@ -476,13 +643,12 @@
             }
 
             nav a {
-                margin: 10px 20px;
-                text-align: left;
-                width: 100%;
+                margin: 15px 20px;
+                font-size: 1.2rem;
             }
 
             .hero {
-                height: 100vh;
+                padding: 0 5%;
             }
 
             .hero-content {
@@ -494,12 +660,13 @@
             }
 
             .hero-content p {
-                font-size: 1.5rem;
+                font-size: 1.2rem;
             }
 
             .about {
                 flex-direction: column;
-                padding: 40px 20px;
+                padding: 60px 20px;
+                gap: 40px;
             }
 
             .about img {
@@ -509,11 +676,16 @@
 
             .tab-buttons {
                 flex-wrap: wrap;
-                gap: 10px;
+                gap: 15px;
             }
 
-            .tab-buttons button {
-                flex: 1 1 auto;
+            .services-grid, .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-item img,
+            .portfolio-item video {
+                max-height: 400px;
             }
         }
     </style>
@@ -523,7 +695,7 @@
 
     <div class="header-container">
         <div class="logo">
-            <img src="images/logo.png" alt="Ilyes Logo">
+            <a href="#home"><img src="images/logo.png" alt="Ilyes Meradji Logo"></a>
         </div>
         <button class="nav-toggle">☰</button>
         <nav>
@@ -541,143 +713,112 @@
             Your browser does not support the video tag.
         </video>
         <div class="hero-content">
-            <h1>3D Generalist</h1>
-            <p>Hi, I'm <span class="name">Ilyes</span></p>
-            <p>A young ambitious guy</p>
-            <p><span class="location">Algeria</span></p>
+            <h1>3D Generalist & Creative Mind</h1>
+            <p>Hey there, I’m <span class="name">Ilyes Meradji</span></p>
+            <p>A passionate freelancer crafting visuals from <span class="location">Algeria</span></p>
+            <p>Turning ideas into stunning realities since 2021</p>
         </div>
     </section>
 
-    <section id="about" class="about">
+    <section id="about" class="about fade-in">
         <div class="about-content">
             <h2>About Me</h2>
-            <p>My full name is Meradji Ilyes Farouk Eddine. I live in Algeria. I've been freelancing since 2021, doing various work in the CGI industry and graphic design in general. What I make sure of is that I do my best in my work. This site is still a WIP.</p>
+            <p>I’m Meradji Ilyes Farouk Eddine, a 3D Generalist and graphic designer based in Algeria. Since 2021, I’ve been freelancing in the CGI and design world, bringing stories to life with tools like Blender, Photoshop, and After Effects. I’m all about blending creativity with precision—whether it’s a jaw-dropping 3D render or a sleek business card. Fun fact: I’m a self-taught coder too, dabbling in Python and JavaScript when I’m not animating. This site’s a work in progress, just like me!</p>
+            <!-- Download CV Button -->
+            <a href="images/CV.pdf" download="Ilyes_Meradji_CV.pdf" class="download-cv-button">Download My CV</a>
         </div>
-        <img src="images/port_pic.png" alt="Ilyes Portrait">
+        <a href="https://www.instagram.com/ilyes.meradji/" target="_blank"><img src="images/port_pic.png" alt="Ilyes Meradji Portrait"></a>
     </section>
 
-    <section id="skills" class="tabs">
+    <section id="skills" class="tabs fade-in">
         <div class="tab-buttons">
             <button class="active" onclick="openTab('skills-tab')">Skills</button>
             <button onclick="openTab('experience-tab')">Experience</button>
             <button onclick="openTab('education-tab')">Education</button>
         </div>
         <div id="skills-tab" class="tab-content active">
-            <p>I am a proficient 3D Generalist and graphic designer with over 5 years of experience using industry-standard tools such as Blender, Photoshop, and DaVinci Resolve. My skill set includes advanced proficiency in Adobe After Effects, GIMP, Marvelous Designer, Houdini, EmberGen, and Substance Painter. I specialize in texturing, UV mapping, 3D modeling, and both 2D and 3D motion graphics. Additionally, I am well-versed in Microsoft Office tools (Excel, Word, PowerPoint) and have strong programming skills in HTML, CSS, JavaScript, Python, and some C#. My diverse expertise allows me to tackle a wide range of creative and technical challenges efficiently.</p>
+            <p>I’m a skilled 3D Generalist and graphic designer with 5+ years mastering tools like Blender, Photoshop, DaVinci Resolve, and After Effects. I excel in texturing, UV mapping, 3D modeling, and both 2D/3D motion graphics. My toolkit also includes GIMP, Marvelous Designer, Houdini, EmberGen, and Substance Painter. Beyond design, I’m proficient in Microsoft Office (Excel, Word, PowerPoint) and code in HTML, CSS, JavaScript, Python, and a bit of C#. I thrive on tackling diverse creative and technical challenges.</p>
         </div>
         <div id="experience-tab" class="tab-content">
-            <p>As a 3D Generalist and freelancer for the past 4 years, I have honed my skills in delivering high-quality CGI and graphic design projects. My experience includes integrating CG elements into live footage, showcasing my expertise in visual effects (VFX). I have worked on various freelance projects since 2021, consistently meeting client expectations by combining creativity with technical precision.</p>
+            <p>For over 4 years, I’ve freelanced as a 3D Generalist, delivering top-notch CGI and design projects. Since 2021, I’ve worked on everything from VFX integration to motion graphics, blending CG with live footage seamlessly. My clients get creativity paired with technical know-how, every time.</p>
         </div>
         <div id="education-tab" class="tab-content">
-            <p>I pursued my education in Accounting at Amar Telidji University in Laghouat, Algeria, where I developed a strong foundation in analytical thinking and problem-solving. While my formal education is in accounting, my passion for CGI and graphic design has driven me to self-educate and excel in these creative fields.</p>
+            <p>I studied Accounting at Amar Telidji University in Laghouat, Algeria, sharpening my analytical skills. But my real passion lies in CGI and design—I’ve taught myself these crafts, driven by a love for creating visuals that pop.</p>
         </div>
     </section>
 
-    <section id="services" class="services">
-        <h2>Services</h2>
+    <section id="services" class="services fade-in">
+        <h2>My Services</h2>
         <div class="services-grid">
             <div class="service-item vfx-cgi">
                 <h3>VFX/CGI Integration</h3>
-                <p>Seamlessly blend CGI elements with live footage for stunning visual effects.</p>
-                <button>Hire Me</button>
+                <p>Seamlessly blend CGI with live footage for cinematic visual effects that captivate.</p>
+                <button onclick="window.location.href='#contact'">Hire Me</button>
             </div>
             <div class="service-item cgi-render">
-                <h3>CGI Render</h3>
-                <p>High-quality 3D renders for visualizations and creative projects.</p>
-                <button>Hire Me</button>
+                <h3>CGI Rendering</h3>
+                <p>High-quality 3D renders for architectural viz, products, or creative showcases.</p>
+                <button onclick="window.location.href='#contact'">Hire Me</button>
             </div>
             <div class="service-item three-d-motion">
                 <h3>3D Motion Graphics</h3>
-                <p>Dynamic and engaging 3D animations for videos and presentations.</p>
-                <button>Hire Me</button>
+                <p>Dynamic 3D animations to elevate videos, ads, or presentations.</p>
+                <button onclick="window.location.href='#contact'">Hire Me</button>
             </div>
             <div class="service-item two-d-motion">
                 <h3>2D Motion Graphics</h3>
-                <p>Captivating 2D animations to enhance your storytelling.</p>
-                <button>Hire Me</button>
+                <p>Smooth, engaging 2D animations to tell your story with flair.</p>
+                <button onclick="window.location.href='#contact'">Hire Me</button>
             </div>
             <div class="service-item excel-word">
-                <h3>Excel/Word Documents</h3>
-                <p>Professional document creation and formatting for business needs.</p>
-                <button>Hire Me</button>
+                <h3>Excel/Word Docs</h3>
+                <p>Polished, professional documents for your business or personal needs.</p>
+                <button onclick="window.location.href='#contact'">Hire Me</button>
             </div>
             <div class="service-item poster">
                 <h3>Poster Design</h3>
-                <p>Eye-catching posters tailored to your brand or event.</p>
-                <button>Hire Me</button>
+                <p>Bold, custom posters that grab attention for events or brands.</p>
+                <button onclick="window.location.href='#contact'">Hire Me</button>
             </div>
             <div class="service-item bus-card">
-                <h3>Business Card Design</h3>
-                <p>Unique and professional business cards to make a lasting impression.</p>
-                <button>Hire Me</button>
+                <h3>Business Cards</h3>
+                <p>Standout designs to leave a lasting impression in every handshake.</p>
+                <button onclick="window.location.href='#contact'">Hire Me</button>
             </div>
             <div class="service-item video-editing">
                 <h3>Video Editing</h3>
-                <p>Professional video editing to bring your footage to life.</p>
-                <button>Hire Me</button>
+                <p>Pro-level editing to transform your footage into a cohesive story.</p>
+                <button onclick="window.location.href='#contact'">Hire Me</button>
             </div>
         </div>
     </section>
 
-    <section id="portfolio" class="portfolio">
+    <section id="portfolio" class="portfolio fade-in">
         <h2>Portfolio</h2>
         <div class="portfolio-grid">
-            <img src="images/inv.png" alt="Portfolio 1">
-            <img src="images/inv2.png" alt="Portfolio 2">
-            <img src="images/inv3.png" alt="Portfolio 3">
-            <img src="images/inv.png" alt="Portfolio 1 Duplicate">
-            <img src="images/inv2.png" alt="Portfolio 2 Duplicate">
-            <img src="images/inv3.png" alt="Portfolio 3 Duplicate">
-            <img src="images/inv.png" alt="Portfolio 1 Duplicate 2">
-            <img src="images/inv2.png" alt="Portfolio 2 Duplicate 2">
-            <img src="images/inv3.png" alt="Portfolio 3 Duplicate 2">
-            <video autoplay muted loop>
-                <source src="images/interion desing in blender.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <video autoplay muted loop>
-                <source src="images/interion desing in blender.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <video autoplay muted loop>
-                <source src="images/interion desing in blender.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <video autoplay muted loop>
-                <source src="images/interion desing in blender.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <video autoplay muted loop>
-                <source src="images/interion desing in blender.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <video autoplay muted loop>
-                <source src="images/interion desing in blender.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <video autoplay muted loop>
-                <source src="images/interion desing in blender.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <video autoplay muted loop>
-                <source src="images/interion desing in blender.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <video autoplay muted loop>
-                <source src="images/interion desing in blender.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+            <div class="portfolio-item">
+                <img src="images/wedding_invitation1.jpg" alt="Wedding Invitation for Hamza and Eshaal">
+                <div class="caption">Wedding Invitation Design - Hamza & Eshaal</div>
+            </div>
+            <div class="portfolio-item">
+                <img src="images/wedding_invitation2.jpg" alt="Wedding Invitation for Rhea and David">
+                <div class="caption">Wedding Invitation Design - Rhea & David</div>
+            </div>
+            <div class="portfolio-item">
+                <img src="images/interior_design.jpg" alt="Interior Design Render">
+                <div class="caption">Interior Design Render - Modern Living Space</div>
+            </div>
         </div>
     </section>
 
-    <section id="contact" class="contact">
-        <h2>Contact</h2>
+    <section id="contact" class="contact fade-in">
+        <h2>Get in Touch</h2>
         <form id="contact-form">
             <input type="text" name="firstName" placeholder="First Name" required>
             <input type="text" name="lastName" placeholder="Last Name" required>
             <input type="email" name="email" placeholder="Email" required>
-            <textarea name="message" placeholder="Your Message" required></textarea>
-            <button type="submit">Send</button>
+            <textarea name="message" placeholder="Tell me about your project..." required></textarea>
+            <button type="submit">Send Message</button>
         </form>
     </section>
 
@@ -694,44 +835,25 @@
             }
 
             document.querySelectorAll('img, video').forEach(asset => {
-                asset.addEventListener('loadeddata', () => {
-                    loaded++;
-                    const progress = (loaded / totalAssets) * 100;
-                    progressBar.style.width = `${progress}%`;
-                    if (progress === 100) {
-                        setTimeout(() => progressBar.style.display = 'none', 500);
-                    }
-                }, { once: true });
-                asset.addEventListener('error', () => {
-                    loaded++;
-                    const progress = (loaded / totalAssets) * 100;
-                    progressBar.style.width = `${progress}%`;
-                    if (progress === 100) {
-                        setTimeout(() => progressBar.style.display = 'none', 500);
-                    }
-                }, { once: true });
+                asset.addEventListener('loadeddata', updateProgress, { once: true });
+                asset.addEventListener('error', updateProgress, { once: true });
             });
+
+            function updateProgress() {
+                loaded++;
+                const progress = (loaded / totalAssets) * 100;
+                progressBar.style.width = `${progress}%`;
+                if (progress === 100) {
+                    setTimeout(() => progressBar.style.display = 'none', 500);
+                }
+            }
         });
 
         function openTab(tabName) {
-            const contents = document.getElementsByClassName('tab-content');
-            for (let content of contents) {
-                content.classList.remove('active');
-            }
-
-            const buttons = document.querySelectorAll('.tab-buttons button');
-            for (let button of buttons) {
-                button.classList.remove('active');
-            }
-
-            const targetContent = document.getElementById(tabName);
-            if (targetContent) {
-                targetContent.classList.add('active');
-            }
-            
-            if (event.currentTarget) {
-                event.currentTarget.classList.add('active');
-            }
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.querySelectorAll('.tab-buttons button').forEach(button => button.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
         }
 
         document.getElementById('contact-form').addEventListener('submit', function(e) {
@@ -742,17 +864,11 @@
             const email = form.email.value;
             const message = form.message.value;
             
-            const subject = `Contact from ${firstName} ${lastName}`;
+            const subject = `Project Inquiry from ${firstName} ${lastName}`;
             const body = `From: ${firstName} ${lastName}\nEmail: ${email}\n\nMessage:\n${message}`;
             
             window.location.href = `mailto:ilyes.meradji@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         });
-
-        // Set initial active tab
-        const firstTabButton = document.querySelector('.tab-buttons button');
-        if (firstTabButton) {
-            firstTabButton.classList.add('active');
-        }
 
         const navToggle = document.querySelector('.nav-toggle');
         const nav = document.querySelector('nav');
@@ -760,6 +876,24 @@
         navToggle.addEventListener('click', () => {
             nav.classList.toggle('active');
             navToggle.textContent = nav.classList.contains('active') ? '✕' : '☰';
+        });
+
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observerOptions = {
+            threshold: 0.2
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        fadeElements.forEach(element => {
+            observer.observe(element);
         });
     </script>
 </body>
